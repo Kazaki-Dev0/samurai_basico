@@ -17,17 +17,11 @@ class _CadastroScreenState extends State<CadastroScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        // O botão de voltar (leading) é automático
 
-        // Ação para adicionar o logo no canto direito
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 24.0),
-            child: Image.asset(
-              'assets/images/logo.png', // Assumindo que é o mesmo logo
-              width: 40,
-              height: 40,
-            ),
+            child: Image.asset('assets/images/logo.png', width: 40, height: 40),
           ),
         ],
       ),
@@ -46,7 +40,6 @@ class _CadastroScreenState extends State<CadastroScreen> {
 
               const SizedBox(height: 30),
 
-              // Campo "Name"
               const Text(
                 'Name',
                 style: TextStyle(
@@ -73,7 +66,6 @@ class _CadastroScreenState extends State<CadastroScreen> {
 
               const SizedBox(height: 20),
 
-              // Campo "Email"
               const Text(
                 'Email',
                 style: TextStyle(
@@ -100,7 +92,6 @@ class _CadastroScreenState extends State<CadastroScreen> {
 
               const SizedBox(height: 20),
 
-              // Campo "Password"
               const Text(
                 'Password',
                 style: TextStyle(
@@ -128,7 +119,6 @@ class _CadastroScreenState extends State<CadastroScreen> {
 
               const SizedBox(height: 20),
 
-              // Campo "Confirm password"
               const Text(
                 'Confirm password',
                 style: TextStyle(
@@ -156,7 +146,6 @@ class _CadastroScreenState extends State<CadastroScreen> {
 
               const SizedBox(height: 20),
 
-              // Checkbox "terms & policy"
               Row(
                 children: [
                   Checkbox(
@@ -190,12 +179,10 @@ class _CadastroScreenState extends State<CadastroScreen> {
 
               const SizedBox(height: 20),
 
-              // Botão "SIGN UP"
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    // TODO: Adicionar lógica de cadastro aqui
                     // Por enquanto, apenas volta para a tela de login
                     // após o "cadastro"
                     Navigator.pop(context);
@@ -244,7 +231,6 @@ class _CadastroScreenState extends State<CadastroScreen> {
 
               const SizedBox(height: 10),
 
-              // Rodapé "Have an account?"
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

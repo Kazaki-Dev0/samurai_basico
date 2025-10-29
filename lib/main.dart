@@ -1,7 +1,6 @@
-// Arquivo: main.dart
 import 'package:flutter/material.dart';
 import 'cadastro_screen.dart';
-import 'onboarding_screen.dart'; // Importa a tela de onboarding
+import 'onboarding_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -79,9 +78,8 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 8),
 
-              // Campo de Texto Email
               TextField(
-                controller: _emailController, // Conectado
+                controller: _emailController,
                 decoration: InputDecoration(
                   hintText: 'ex: jon.smith@email.com',
                   filled: true,
@@ -107,9 +105,8 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 8),
 
-              // Campo de Texto Senha
               TextField(
-                controller: _passwordController, // Conectado
+                controller: _passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
                   hintText: '*********',
@@ -128,7 +125,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
               const SizedBox(height: 30),
 
-              // Botão de Sign In
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
@@ -230,7 +226,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  // Widget auxiliar para criar os botões de redes sociais
   Widget _buildSocialButton(String imagePath) {
     return Container(
       padding: const EdgeInsets.all(12),
