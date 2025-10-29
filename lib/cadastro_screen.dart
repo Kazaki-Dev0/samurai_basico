@@ -1,75 +1,79 @@
-// Arquivo: main.dart
 import 'package:flutter/material.dart';
-import 'cadastro_screen.dart';
-import 'onboarding_screen.dart'; // Importa a tela de onboarding
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class CadastroScreen extends StatefulWidget {
+  const CadastroScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Exemplo Imagem Flutter',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color.fromARGB(255, 255, 255, 255),
-        ),
-        useMaterial3: true,
-      ),
-      home: const LoginScreen(title: 'Exibindo Imagem Local'),
-    );
-  }
+  State<CadastroScreen> createState() => _CadastroScreenState();
 }
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key, required this.title});
-  final String title;
-
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  // Controladores para ler o texto
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-
-  // Limpar os controladores quando a tela for destruída
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
+class _CadastroScreenState extends State<CadastroScreen> {
+  // Variável para o checkbox
+  bool _isChecked = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        // O botão de voltar (leading) é automático
+
+        // Ação para adicionar o logo no canto direito
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 24.0),
+            child: Image.asset(
+              'assets/images/logo.png', // Assumindo que é o mesmo logo
+              width: 40,
+              height: 40,
+            ),
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              const SizedBox(height: 80),
-              Center(
-                child: Image.asset(
-                  'assets/images/logo.png',
-                  width: 200,
-                  height: 200,
-                ),
-              ),
               const SizedBox(height: 20),
+
               Text(
-                'Sign in your account',
+                'Create your account',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
               ),
+
               const SizedBox(height: 30),
+
+              // Campo "Name"
+              const Text(
+                'Name',
+                style: TextStyle(
+                  color: Colors.black54,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(height: 8),
+              TextField(
+                decoration: InputDecoration(
+                  hintText: 'ex: jon smith',
+                  filled: true,
+                  fillColor: Colors.grey[100],
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(
+                    vertical: 16,
+                    horizontal: 12,
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 20),
+
+              // Campo "Email"
               const Text(
                 'Email',
                 style: TextStyle(
@@ -78,10 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               const SizedBox(height: 8),
-
-              // Campo de Texto Email
               TextField(
-                controller: _emailController, // Conectado
                 decoration: InputDecoration(
                   hintText: 'ex: jon.smith@email.com',
                   filled: true,
@@ -98,6 +99,8 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
 
               const SizedBox(height: 20),
+
+              // Campo "Password"
               const Text(
                 'Password',
                 style: TextStyle(
@@ -106,10 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               const SizedBox(height: 8),
-
-              // Campo de Texto Senha
               TextField(
-                controller: _passwordController, // Conectado
                 obscureText: true,
                 decoration: InputDecoration(
                   hintText: '*********',
@@ -126,35 +126,79 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
 
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
 
-              // Botão de Sign In
+              // Campo "Confirm password"
+              const Text(
+                'Confirm password',
+                style: TextStyle(
+                  color: Colors.black54,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(height: 8),
+              TextField(
+                obscureText: true,
+                decoration: InputDecoration(
+                  hintText: '*********',
+                  filled: true,
+                  fillColor: Colors.grey[100],
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(
+                    vertical: 16,
+                    horizontal: 12,
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 20),
+
+              // Checkbox "terms & policy"
+              Row(
+                children: [
+                  Checkbox(
+                    value: _isChecked,
+                    activeColor: Colors.green,
+                    onChanged: (bool? newValue) {
+                      setState(() {
+                        _isChecked = newValue!;
+                      });
+                    },
+                  ),
+                  Flexible(
+                    child: RichText(
+                      text: TextSpan(
+                        style: TextStyle(color: Colors.black54, fontSize: 14),
+                        children: [
+                          TextSpan(text: 'I understood the '),
+                          TextSpan(
+                            text: 'terms & policy.',
+                            style: TextStyle(
+                              color: Colors.green,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 20),
+
+              // Botão "SIGN UP"
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    // 1. Captura o texto digitado
-                    String email = _emailController.text;
-                    String password = _passwordController.text;
-
-                    // 2. A condicional
-                    if (email == 'user@gmail.com' && password == 'user123') {
-                      // SUCESSO: Navega para a tela de Onboarding
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => OnboardingScreen(),
-                        ),
-                      );
-                    } else {
-                      // ERRO: Mostra uma mensagem
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Usuário ou senha errados'),
-                          backgroundColor: Colors.red[700],
-                        ),
-                      );
-                    }
+                    // TODO: Adicionar lógica de cadastro aqui
+                    // Por enquanto, apenas volta para a tela de login
+                    // após o "cadastro"
+                    Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
@@ -164,7 +208,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   child: const Text(
-                    'SIGN IN',
+                    'SIGN UP',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -175,13 +219,18 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
 
               const SizedBox(height: 30),
+
+              // "or sign up with"
               const Center(
                 child: Text(
-                  'or sign in with',
+                  'or sign up with',
                   style: TextStyle(color: Colors.black54),
                 ),
               ),
+
               const SizedBox(height: 20),
+
+              // Botões sociais
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -192,33 +241,29 @@ class _LoginScreenState extends State<LoginScreen> {
                   _buildSocialButton('assets/images/twiter_logo.png'),
                 ],
               ),
-              const SizedBox(height: 40),
 
-              // Texto de "Sign Up"
+              const SizedBox(height: 10),
+
+              // Rodapé "Have an account?"
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    "Don't have an account? ",
+                    "Have an account? ",
                     style: TextStyle(color: Colors.black54),
                   ),
                   TextButton(
+                    onPressed: () {
+                      // Comando para VOLTAR (fechar a tela de cadastro)
+                      Navigator.pop(context);
+                    },
                     child: const Text(
-                      'SIGN UP',
+                      'SIGN IN',
                       style: TextStyle(
                         color: Colors.green,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    onPressed: () {
-                      // Navegação para a tela de cadastro
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CadastroScreen(),
-                        ),
-                      );
-                    },
                   ),
                 ],
               ),
